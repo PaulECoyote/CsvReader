@@ -1,0 +1,49 @@
+Test pass #1 - All fields
+
+CsvReader - No cache :           4605585548 clocks, 1.5390 sec., 28.5897 MB/sec.
+CachedCsvReader - Run 1 :        9766819133 clocks, 3.2637 sec., 13.4816 MB/sec.
+CachedCsvReader - Run 2 :        1703025 clocks, 0.0006 sec., 77316.6571 MB/sec.
+OleDb :                          66380416162 clocks, 22.1819 sec., 1.9836 MB/sec.
+Regex :                          47773702965 clocks, 15.9642 sec., 2.7562 MB/sec.
+
+Test pass #1 - Field #72 (middle)
+
+CsvReader - No cache :           3110530747 clocks, 1.0394 sec., 42.3311 MB/sec.
+CachedCsvReader - Run 1 :        9131054618 clocks, 3.0513 sec., 14.4203 MB/sec.
+CachedCsvReader - Run 2 :        256927 clocks, 0.0001 sec., 512488.7614 MB/sec.
+OleDb :                          38825921437 clocks, 12.9742 sec., 3.3913 MB/sec.
+Regex :                          20031990525 clocks, 6.6940 sec., 6.5731 MB/sec.
+
+Test pass #2 - All fields
+
+CsvReader - No cache :           4473482400 clocks, 1.4949 sec., 29.4339 MB/sec.
+CachedCsvReader - Run 1 :        9472848923 clocks, 3.1655 sec., 13.9000 MB/sec.
+CachedCsvReader - Run 2 :        197393 clocks, 0.0001 sec., 667056.0760 MB/sec.
+OleDb :                          65719919745 clocks, 21.9612 sec., 2.0035 MB/sec.
+Regex :                          44995705950 clocks, 15.0359 sec., 2.9263 MB/sec.
+
+Test pass #2 - Field #72 (middle)
+
+CsvReader - No cache :           3055430985 clocks, 1.0210 sec., 43.0945 MB/sec.
+CachedCsvReader - Run 1 :        9145695007 clocks, 3.0562 sec., 14.3972 MB/sec.
+CachedCsvReader - Run 2 :        184395 clocks, 0.0001 sec., 714076.8459 MB/sec.
+OleDb :                          39162717232 clocks, 13.0867 sec., 3.3622 MB/sec.
+Regex :                          19862999370 clocks, 6.6375 sec., 6.6290 MB/sec.
+
+Test pass #3 - All fields
+
+CsvReader - No cache :           4465943970 clocks, 1.4924 sec., 29.4836 MB/sec.
+CachedCsvReader - Run 1 :        9448539052 clocks, 3.1574 sec., 13.9357 MB/sec.
+CachedCsvReader - Run 2 :        194820 clocks, 0.0001 sec., 675865.9275 MB/sec.
+OleDb :                          65957694915 clocks, 22.0406 sec., 1.9963 MB/sec.
+Regex :                          44392285102 clocks, 14.8343 sec., 2.9661 MB/sec.
+
+Test pass #3 - Field #72 (middle)
+
+CsvReader - No cache :           3057461160 clocks, 1.0217 sec., 43.0659 MB/sec.
+CachedCsvReader - Run 1 :        9138225435 clocks, 3.0537 sec., 14.4089 MB/sec.
+CachedCsvReader - Run 2 :        201937 clocks, 0.0001 sec., 652045.9351 MB/sec.
+OleDb :                          39287322217 clocks, 13.1284 sec., 3.3515 MB/sec.
+Regex :                          19721576333 clocks, 6.5902 sec., 6.6766 MB/sec.
+
+Done

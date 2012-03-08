@@ -116,6 +116,12 @@ namespace LumenWorks.Framework.IO.Csv
 		/// </summary>
 		private bool _hasHeaders;
 
+        /// <summary>
+        /// Gets or sets the default header name when it is an empty string or only whitespaces.
+        /// The header index will be appended to the specified name.
+        /// </summary>
+        private string _defaultHeaderName;
+
 		/// <summary>
 		/// Contains the default action to take when a parsing error has occured.
 		/// </summary>
@@ -356,13 +362,13 @@ namespace LumenWorks.Framework.IO.Csv
 
 			if (reader is StreamReader)
 			{
-				Stream stream = ((StreamReader)reader).BaseStream;
+				Stream stream = ((StreamReader) reader).BaseStream;
 
 				if (stream.CanSeek)
 				{
 					// Handle bad implementations returning 0 or less
 					if (stream.Length > 0)
-						_bufferSize = (int)Math.Min(bufferSize, stream.Length);
+						_bufferSize = (int) Math.Min(bufferSize, stream.Length);
 				}
 			}
 
@@ -376,7 +382,7 @@ namespace LumenWorks.Framework.IO.Csv
 			_trimmingOptions = trimmingOptions;
 			_supportsMultiline = true;
 			_skipEmptyLines = true;
-			this.DefaultHeaderName = "Column";
+            _defaultHeaderName = "Column";
 
 			_currentRecordIndex = -1;
 			_defaultParseErrorAction = ParseErrorAction.RaiseEvent;
@@ -561,7 +567,18 @@ namespace LumenWorks.Framework.IO.Csv
 		/// The header index will be appended to the specified name.
 		/// </summary>
 		/// <value>The default header name when it is an empty string or only whitespaces.</value>
-		public string DefaultHeaderName { get; set; }
+        public string DefaultHeaderName
+        {
+            get
+            {
+                return _defaultHeaderName;
+            }
+
+            set
+            {
+                _defaultHeaderName = value ?? String.Empty;
+            }
+        }
 
 		#endregion
 
@@ -606,13 +623,7 @@ namespace LumenWorks.Framework.IO.Csv
 		{
 			EnsureInitialize();
 			Debug.Assert(_fieldHeaders != null, "Field headers must be non null.");
-
-			string[] fieldHeaders = new string[_fieldHeaders.Length];
-
-			for (int i = 0; i < fieldHeaders.Length; i++)
-				fieldHeaders[i] = _fieldHeaders[i];
-
-			return fieldHeaders;
+			return (string[])_fieldHeaders.Clone();
 		}
 
 		/// <summary>
@@ -1193,6 +1204,9 @@ namespace LumenWorks.Framework.IO.Csv
 					{
 						value = string.Empty;
 						_fields[field] = value;
+
+						if (field < _fieldCount)
+							_missingFieldFlag = true;
 					}
 					else if (_buffer[_nextFieldStart] != _quote)
 					{
@@ -1553,7 +1567,7 @@ namespace LumenWorks.Framework.IO.Csv
 					{
 						string headerName = _fields[i];
 						if (string.IsNullOrEmpty(headerName) || headerName.Trim().Length == 0)
-							headerName = this.DefaultHeaderName + i.ToString();
+                            headerName = _defaultHeaderName + i.ToString();
 
 						_fieldHeaders[i] = headerName;
 						_fieldHeaderIndexes.Add(headerName, i);
@@ -1921,11 +1935,11 @@ namespace LumenWorks.Framework.IO.Csv
 			Debug.Assert(destinationArray.GetType() == typeof(char[]) || destinationArray.GetType() == typeof(byte[]));
 
 			if (destinationArray.GetType() == typeof(char[]))
-				Array.Copy(value.ToCharArray((int)fieldOffset, length), 0, destinationArray, destinationOffset, length);
+				Array.Copy(value.ToCharArray((int) fieldOffset, length), 0, destinationArray, destinationOffset, length);
 			else
 			{
-				char[] chars = value.ToCharArray((int)fieldOffset, length);
-				byte[] source = new byte[chars.Length]; ;
+				char[] chars = value.ToCharArray((int) fieldOffset, length);
+				byte[] source = new byte[chars.Length];
 
 				for (int i = 0; i < chars.Length; i++)
 					source[i] = Convert.ToByte(chars[i]);
@@ -2028,7 +2042,7 @@ namespace LumenWorks.Framework.IO.Csv
 				columnNames = new string[_fieldCount];
 
 				for (int i = 0; i < _fieldCount; i++)
-					columnNames[i] = "Column" + i.ToString(CultureInfo.InvariantCulture);
+                    columnNames[i] = _defaultHeaderName + i.ToString(CultureInfo.InvariantCulture);
 			}
 
 			// null marks columns that will change for each row
@@ -2105,7 +2119,7 @@ namespace LumenWorks.Framework.IO.Csv
 		{
 			ValidateDataReader(DataReaderValidations.IsInitialized | DataReaderValidations.IsNotClosed);
 
-			if (((IDataRecord)this).IsDBNull(i))
+			if (((IDataRecord) this).IsDBNull(i))
 				return DBNull.Value;
 			else
 				return this[i];
@@ -2151,7 +2165,7 @@ namespace LumenWorks.Framework.IO.Csv
 		{
 			ValidateDataReader(DataReaderValidations.IsInitialized | DataReaderValidations.IsNotClosed);
 
-			IDataRecord record = (IDataRecord)this;
+			IDataRecord record = (IDataRecord) this;
 
 			for (int i = 0; i < _fieldCount; i++)
 				values[i] = record.GetValue(i);
@@ -2170,7 +2184,7 @@ namespace LumenWorks.Framework.IO.Csv
 			if (_hasHeaders)
 				return _fieldHeaders[i];
 			else
-				return "Column" + i.ToString(CultureInfo.InvariantCulture);
+                return _defaultHeaderName + i.ToString(CultureInfo.InvariantCulture);
 		}
 
 		long IDataRecord.GetInt64(int i)

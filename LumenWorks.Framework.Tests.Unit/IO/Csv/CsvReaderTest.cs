@@ -972,9 +972,28 @@ namespace LumenWorks.Framework.Tests.Unit.IO.Csv
 			using (var csv = new CsvReader(new StringReader(" "), false))
 			{
 				Assert.IsTrue(csv.ReadNextRecord());
-				Assert.AreEqual(1,csv.FieldCount);
+				Assert.AreEqual(1, csv.FieldCount);
 				Assert.AreEqual(string.Empty, csv[0]);
 				Assert.IsFalse(csv.ReadNextRecord());
+			}
+		}
+
+		[Test]
+		public void ParsingTest43()
+		{
+			using (var csv = new CsvReader(new StringReader("a,b\n   "), false))
+			{
+				csv.SkipEmptyLines = true;
+				csv.MissingFieldAction = MissingFieldAction.ReplaceByNull;
+
+				Assert.IsTrue(csv.ReadNextRecord());
+				Assert.AreEqual(2, csv.FieldCount);
+				Assert.AreEqual("a", csv[0]);
+				Assert.AreEqual("b", csv[1]);
+
+				csv.ReadNextRecord();
+				Assert.AreEqual(string.Empty, csv[0]);
+				Assert.AreEqual(null, csv[1]);
 			}
 		}
 
@@ -990,7 +1009,7 @@ namespace LumenWorks.Framework.Tests.Unit.IO.Csv
 			char[] raw = new char[65536 - 13];
 
 			for (int i = 0; i < raw.Length; i++)
-				raw[i] = (char)(i + 14);
+				raw[i] = (char) (i + 14);
 
 			raw[44 - 14] = ' '; // skip comma
 

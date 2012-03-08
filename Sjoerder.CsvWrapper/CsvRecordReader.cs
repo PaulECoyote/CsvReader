@@ -12,7 +12,7 @@ namespace Sjoerder.CsvWrapper
     public class CsvRecordReader : IDisposable, IEnumerable<CsvRecord>
     {
         private CsvReader csvReader;
-        private readonly CsvHeaders headers;
+        private CsvHeaders headers;
         public bool SkipEmptyLines { get { return csvReader.SkipEmptyLines; } set { csvReader.SkipEmptyLines = value; } }
         public string DefaultHeaderName { get { return csvReader.DefaultHeaderName; } set { csvReader.DefaultHeaderName = value; } }
         public bool SupportsMultiline { get { return csvReader.SupportsMultiline; } set { csvReader.SupportsMultiline = value; } }
@@ -23,6 +23,13 @@ namespace Sjoerder.CsvWrapper
 
         public CsvHeaders GetFieldHeaders()
         {
+            // Late initialisation
+            if (null == this.headers && this.csvReader.HasHeaders)
+            {
+                var headersArray = csvReader.GetFieldHeaders();
+                this.headers = new CsvHeaders(headersArray);
+            }
+
             return headers;
         }
 
@@ -141,15 +148,16 @@ namespace Sjoerder.CsvWrapper
         public CsvRecordReader(TextReader reader, bool hasHeaders, char delimiter, char quote, char escape, char comment, ValueTrimmingOptions trimmingOptions, int bufferSize)
 		{
             this.csvReader = new CsvReader(reader, hasHeaders, delimiter, quote, escape, comment, trimmingOptions, bufferSize);
-            if (hasHeaders)
-            {
-                var headersArray = csvReader.GetFieldHeaders();
-                this.headers = new CsvHeaders(headersArray);
-            }
 		}
 
         public CsvRecord Read()
         {
+            if (null == this.headers && this.csvReader.HasHeaders)
+            {
+                var headersArray = csvReader.GetFieldHeaders();
+                this.headers = new CsvHeaders(headersArray);
+            }
+
             if (!csvReader.ReadNextRecord())
                 return null;
 

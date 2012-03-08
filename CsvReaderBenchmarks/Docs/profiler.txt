@@ -1,0 +1,84 @@
+Summary for CsvReaderDemo.exe csvreader
+Allocated bytes:                 21,021,721
+Relocated bytes:                    109,575
+Final Heap bytes:                   235,638
+Objects finalized:                        0
+Critical objects finalized:               0
+Gen 0 collections:                       41
+Gen 1 collections:                        0
+Gen 2 collections:                        0
+Induced collections:                      0
+Gen 0 Heap bytes:                   526,173
+Gen 1 Heap bytes:                    34,040
+Gen 2 Heap bytes:                        12
+Large Object Heap bytes:              8,784
+Handles created:                         27
+Handles destroyed:                        0
+Handles surviving:                       27
+Heap Dumps:                               0
+Comments:                                 0
+
+Summary for CsvReaderDemo.exe oledb
+Allocated bytes:                 14,829,541
+Relocated bytes:                    287,894
+Final Heap bytes:                   511,356
+Objects finalized:                       27
+Critical objects finalized:              27
+Gen 0 collections:                       28
+Gen 1 collections:                        1
+Gen 2 collections:                        0
+Induced collections:                      0
+Gen 0 Heap bytes:                   524,718
+Gen 1 Heap bytes:                   165,244
+Gen 2 Heap bytes:                   161,724
+Large Object Heap bytes:             22,752
+Handles created:                         89
+Handles destroyed:                       16
+Handles surviving:                       73
+Heap Dumps:                               0
+Comments:                                 0
+
+Summary for CsvReaderDemo.exe regex
+Allocated bytes:                320,411,931
+Relocated bytes:                 16,987,775
+Final Heap bytes:                   446,695
+Objects finalized:                        0
+Critical objects finalized:               0
+Gen 0 collections:                      356
+Gen 1 collections:                       51
+Gen 2 collections:                        0
+Induced collections:                      0
+Gen 0 Heap bytes:                   905,343
+Gen 1 Heap bytes:                   317,174
+Gen 2 Heap bytes:                    75,564
+Large Object Heap bytes:             15,072
+Handles created:                         45
+Handles destroyed:                        2
+Handles surviving:                       43
+Heap Dumps:                               0
+Comments:                                 0
+
+
+
+
+
+CsvReaderBenchmarks.exe csvreader
+Allocated bytes:                 21,032,439
+Relocated bytes:                    109,251
+Final Heap bytes:                   242,544
+Objects finalized:                        0
+Critical objects finalized:               0
+Gen 0 collections:                       41
+Gen 1 collections:                        0
+Gen 2 collections:                        0
+Induced collections:                      0
+Gen 0 Heap bytes:                   526,263
+Gen 1 Heap bytes:                    32,688
+Gen 2 Heap bytes:                        12
+Large Object Heap bytes:             17,008
+Handles created:                         35
+Handles destroyed:                        0
+Handles surviving:                       35
+Heap Dumps:                               0
+Comments:                                 0
+

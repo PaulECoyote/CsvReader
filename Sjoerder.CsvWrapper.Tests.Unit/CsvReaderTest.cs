@@ -560,7 +560,7 @@ namespace Sjoerder.CsvWrapper.Tests.Unit
         [Test]
         public void ParsingTest22()
         {
-            const string data = "\r\r\n1\r";
+            const string data = "\r\r\n1\r\r";
 
             using (CsvRecordReader csv = new CsvRecordReader(new System.IO.StringReader(data), false, '\r', '\"', '\"', '#', ValueTrimmingOptions.None))
             {
