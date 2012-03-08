@@ -6,6 +6,7 @@ This is a fork of [Sebastien Lorion](http://sebastienlorion.com) original ["A-Fa
 
 [Sjoerd Langkemper](https://github.com/Sjord) already put this code on to Github and extended it, adding an extra wrapper and more tests.  
 
+Also consider looking at [NLight](http://nlight.codeplex.com/) - in particular NLight.IO - a more recent CSV parser by [Sebastien Lorion](http://sebastienlorion.com).
 #Introduction From CodeProject
 _From [Original article](http://www.codeproject.com/Articles/9258/A-Fast-CSV-Reader#Introduction)_
 
@@ -23,7 +24,9 @@ To give more down-to-earth numbers, with a 45 MB CSV file containing 145 fields 
 
 #Licence
 Original Copyright (c) 2005-2011 Sébastien Lorion
+
 Copyright (c) 2011 Sjoerd Langkemper
+
 Copyright (c) 2012 Paul Evans and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
